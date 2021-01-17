@@ -24,7 +24,7 @@ Build in production mode:
 
     npm run build:prod
 
-### Site on local env
+### App on local env
 Open with desired browser:
 
     {project-root}/dist/index.html
