@@ -1,5 +1,4 @@
 import DataStorageHandler from './DataStorageHandler';
-import Heading from './Heading';
 import ProjectList from './ProjectList';
 
 import './styles.css';
@@ -11,13 +10,8 @@ const App = () => {
   console.log('project list:', projects);
 
   const render = () => {
-    // Display heading of the application
-    Heading();
-
     // Display project list
     ProjectList({ projects });
-
-    // Display button for creating new project
   };
 
   return render();

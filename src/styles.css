@@ -1,3 +1,57 @@
+/* For entire application */
 body {
   font-family: 'Economica', sans-serif;
+}
+
+main {
+  width: 600px;
+  margin: auto;
+  background-color: wheat;
+  border-radius: 10px;
+  padding: 1px 20px 20px 20px;
+}
+
+.flex-dir-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-dir-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-justify-sb {
+  justify-content: space-between;
+}
+
+/* For Notification */
+.error {
+  color: red;
+}
+
+.info {
+  color: green;
+}
+
+/* For create project form */
+#add-project-form {
+  width: 70%;
+}
+
+#add-project-form > input { 
+  margin-bottom: 10px;
+  height: 25px;
+  padding: 0 10px;
+}
+
+/* For create todo form */
+#add-todo-form {
+  width: 70%;
+}
+
+#add-todo-form > input { 
+  margin-bottom: 10px;
+  height: 25px;
+  padding: 0 10px;
 }

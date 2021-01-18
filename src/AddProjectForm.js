@@ -31,19 +31,21 @@ const AddProjectForm = () => {
   };
 
   const render = () => {
-    // Clear project-list element
+    // Clear earlier content from project-list element
     const projectListElem = document.getElementById('project-list');
     projectListElem.remove();
 
-    // Add div for create project 'form'
-    const formElem = document.createElement('form');
+    // Add div element for create project 'form'
+    const formElem = document.createElement('div');
+    formElem.id = 'add-project-form'
+    formElem.classList.add('flex-dir-col');
 
     // Add form title
     const title = document.createElement('h2');
     title.innerText = 'Create new project';
     formElem.appendChild(title);
     
-    // Add required input fields
+    // Add project title input field
     const titleInputLabel = document.createElement('label');
     titleInputLabel.setAttribute('for', 'project-title');
     titleInputLabel.innerText = 'Title:';
@@ -53,6 +55,7 @@ const AddProjectForm = () => {
     titleInput.id = 'project-title';
     formElem.appendChild(titleInput);
 
+    // Add project description input field
     const descriptionInputLabel = document.createElement('label');
     descriptionInputLabel.setAttribute('for', 'project-desc');
     descriptionInputLabel.innerText = 'Description:';
@@ -62,12 +65,27 @@ const AddProjectForm = () => {
     descInput.id = 'project-desc';
     formElem.appendChild(descInput);
 
+    // Add row container for the action buttons
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('flex-dir-row');
+    buttonContainer.classList.add('flex-justify-sb');
+
     // Add submit button
-    const button = document.createElement('button');
-    const buttonLabel = document.createTextNode('Save');
-    button.appendChild(buttonLabel);
-    button.addEventListener("click", (e) => { handleOnSubmit(e) });
-    formElem.appendChild(button);
+    const submitButton = document.createElement('button');
+    const submitButtonLabel = document.createTextNode('Save');
+    submitButton.appendChild(submitButtonLabel);
+    submitButton.addEventListener("click", (e) => { handleOnSubmit(e) });
+    buttonContainer.appendChild(submitButton);
+    
+    // Add cancel button
+    const cancelButton = document.createElement('button');
+    const cancelButtonLabel = document.createTextNode('Cancel');
+    cancelButton.appendChild(cancelButtonLabel);
+    cancelButton.addEventListener("click", () => location.reload() );
+    buttonContainer.appendChild(cancelButton);
+
+    // Add button container on the form element
+    formElem.appendChild(buttonContainer);
 
     // Append form element on the page
     const mainContainer = document.getElementById('main-content');

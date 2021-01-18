@@ -12,7 +12,7 @@ const ProjectList = ({ projects }) => {
     const div = document.createElement('div');
     const button = document.createElement('button');
     button.addEventListener("click", () => { AddProjectForm() });
-    const label = document.createTextNode('Add project');
+    const label = document.createTextNode('New project');
     button.appendChild(label);
     div.appendChild(button);
     projectListContainer.appendChild(div);
