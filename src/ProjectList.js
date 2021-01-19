@@ -4,7 +4,9 @@ import AddProjectForm from './AddProjectForm';
 const ProjectList = ({ projects }) => {
 
   const render = () => {
+    // Get main-content element and clear it.
     const mainContainer = document.getElementById('main-content');
+    mainContainer.innerHTML = '';
     
     const projectListContainer = document.createElement('div');
     projectListContainer.id = 'project-list';

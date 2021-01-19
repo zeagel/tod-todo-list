@@ -1,4 +1,6 @@
-const TodoList = ({ todos }) => {
+import Todo from './Todo';
+
+const TodoList = ({ project, todos }) => {
   const render = () => {
     
     if (todos.length === 0) {
@@ -10,6 +12,7 @@ const TodoList = ({ todos }) => {
 
       todos.forEach(todo => {
         const todoRow = document.createElement('div');
+        todoRow.addEventListener("click", () => { Todo({ project, todo }) } );
         todoRow.innerText = `${todo.title}, ${todo.priority}, ${todo.dueDate}`;
         todoContainer.appendChild(todoRow);
       });

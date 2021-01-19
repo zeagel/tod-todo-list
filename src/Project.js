@@ -2,6 +2,7 @@ import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
 import DataStorageHandler from './DataStorageHandler';
 import Notification from './Notification';
+import ProjectList from './ProjectList';
 
 const Project = ({ project }) => {
 
@@ -33,7 +34,9 @@ const Project = ({ project }) => {
 
       // Redirect user back to updated project list after the timeout
       setTimeout(() => {
-        location.reload();
+        const message = document.getElementById('message-container');
+        message.innerHTML = '';
+        ProjectList({ projects });
       }, 3500);      
  
     } catch (e) {
@@ -91,7 +94,7 @@ const Project = ({ project }) => {
     projectDetailsElem.appendChild(descElem);
 
     // Add all project's todo-items (if any)
-    const todoListElement = TodoList({ todos: project.todoList });
+    const todoListElement = TodoList({ project, todos: project.todoList });
     if (todoListElement) {
       projectDetailsElem.appendChild(todoListElement);
     }
