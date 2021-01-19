@@ -16,6 +16,26 @@ const DataStorageHandler = (() => {
     if (localStorage.getItem('MHoTodoListApp')) {
       
       const data = JSON.parse(localStorage.getItem('MHoTodoListApp'));
+
+      const getArrayOfTodoItems = (todoListJSON) => {
+        const todoList = [];
+
+        todoListJSON.forEach(t => {
+          const todoItem = new TodoItem({
+            title: t.title,
+            id: t.id,
+            isOpen: t.isOpen,
+            description: t.description,
+            dueDate: t.dueDate,
+            priority: t.priority,
+            notes: t.notes            
+          });
+
+          todoList.push(todoItem);
+        });
+
+        return todoList;
+      };
       
       data.forEach(d => {
         
@@ -23,7 +43,7 @@ const DataStorageHandler = (() => {
           title: d.title,
           id: d.id,
           description: d.description,
-          todoList: d.todoList
+          todoList: getArrayOfTodoItems(d.todoList)
         })
 
         projectList.push(projectItem);

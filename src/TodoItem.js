@@ -5,9 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 export default class TodoItem {
 
   // Public fields of the class
+  title;
   id;
   isOpen;
-  title;
   description;
   dueDate;
   priority;
@@ -22,14 +22,22 @@ export default class TodoItem {
   constructor(
     { 
       title,
+      id = '',
+      isOpen = true,
       description = '',
       dueDate = '',
       priority = 'LOW',
+      notes = []
     }
   ) {
-    this.id = uuidv4();
-    this.isOpen = true;
     this.title = title;
+
+    id !== ''
+      ? this.id = id
+      : this.id = uuidv4();
+    
+    this.isOpen = isOpen;
+
     this.description = description;
     
     dueDate === ''
@@ -40,8 +48,14 @@ export default class TodoItem {
       ? this.priority = priority
       : this.priority = this.validatePriorityValue(priority);
     
-    this.notes = [];
+    notes.length > 0
+      ? this.notes = this.validateNotes(notes)
+      : this.notes = []; 
   };
+
+  validateNotes (notes) {
+    return notes;
+  }
 
   validateDateValue (date) {
     if (!isValid(new Date(date))) {

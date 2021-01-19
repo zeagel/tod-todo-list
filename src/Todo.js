@@ -77,7 +77,7 @@ const Todo = ({ project, todo }) => {
     addButton.id = 'add-note-btn';
     const addButtonLabel = document.createTextNode('New note');
     addButton.appendChild(addButtonLabel);
-    addButton.addEventListener("click", () => { AddNoteForm() } );
+    addButton.addEventListener("click", () => { AddNoteForm({ project, todo }) } );
     todoContainer.appendChild(addButton);
     
     // Add button for removing the todo.
