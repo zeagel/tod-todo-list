@@ -1,5 +1,5 @@
-import ProjectItem from './ProjectItem';
-import DataStorageHandler from './DataStorageHandler';
+import ProjectItem from '../../classes/ProjectItem';
+import DataStorageHandler from '../../utils/DataStorageHandler';
 
 const AddProjectForm = () => {
 

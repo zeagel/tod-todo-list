@@ -1,5 +1,5 @@
-import Project from './Project';
-import AddProjectForm from './AddProjectForm';
+import Project from '../Project/Project';
+import AddProjectForm from '../AddProjectForm/AddProjectForm';
 
 const ProjectList = ({ projects }) => {
 
@@ -21,13 +21,19 @@ const ProjectList = ({ projects }) => {
     
     projects.forEach(project => {
       const projectRow = document.createElement('div');
-      projectRow.className = 'project-row';
+      projectRow.classList.add('project-row');
       projectRow.id = project.id;
+      projectRow.addEventListener("click", () => { Project({ project }) });
+      
+      const todoCountElem = document.createElement('div')
+      todoCountElem.innerText = `( ${project.todoList.length} )`;
+      projectRow.appendChild(todoCountElem);
+
       const projectTitle = document.createElement('div')
-      projectTitle.innerText = `${project.title} (${project.todoList.length})`;
-      projectTitle.addEventListener("click", () => { Project({ project }) });
+      projectTitle.innerText = project.title;
       projectRow.appendChild(projectTitle);
-      projectListContainer.appendChild(projectRow)
+      
+      projectListContainer.appendChild(projectRow);
     });
     
     mainContainer.appendChild(projectListContainer);

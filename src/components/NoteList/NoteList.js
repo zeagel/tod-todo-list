@@ -1,5 +1,5 @@
-import DataStorageHandler from "./DataStorageHandler";
-import Todo from "./Todo";
+import DataStorageHandler from "../../utils/DataStorageHandler";
+import Todo from "../Todo/Todo";
 
 const NoteList = ({ notes }) => {
 

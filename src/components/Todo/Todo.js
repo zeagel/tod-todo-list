@@ -1,8 +1,8 @@
-import Project from "./Project";
-import DataStorageHandler from './DataStorageHandler';
-import AddNoteForm from './AddNoteForm';
-import NoteList from './NoteList';
-import Notification from './Notification';
+import Project from "../Project/Project";
+import DataStorageHandler from '../../utils/DataStorageHandler';
+import AddNoteForm from '../AddNoteForm/AddNoteForm';
+import NoteList from '../NoteList/NoteList';
+import Notification from '../Notification/Notification';
 
 const Todo = ({ project, todo }) => {
 

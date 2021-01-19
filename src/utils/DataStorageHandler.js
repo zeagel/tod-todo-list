@@ -1,5 +1,5 @@
-import ProjectItem from './ProjectItem';
-import TodoItem from './TodoItem';
+import ProjectItem from '../classes/ProjectItem';
+import TodoItem from '../classes/TodoItem';
 
 const DataStorageHandler = (() => {
   

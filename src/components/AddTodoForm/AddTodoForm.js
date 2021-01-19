@@ -1,7 +1,7 @@
 import { isValid } from 'date-fns';
-import Project from './Project';
-import TodoItem from './TodoItem';
-import DataStorageHandler from './DataStorageHandler';
+import Project from '../Project/Project';
+import TodoItem from '../../classes/TodoItem';
+import DataStorageHandler from '../../utils/DataStorageHandler';
 
 const AddTodoForm = ({ project }) => {
   

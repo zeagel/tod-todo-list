@@ -1,7 +1,7 @@
-import DataStorageHandler from './DataStorageHandler';
-import ProjectList from './ProjectList';
+import DataStorageHandler from '../../utils/DataStorageHandler';
+import ProjectList from '../ProjectList/ProjectList';
 
-import './styles.css';
+import './app.css';
 
 const App = () => {
 

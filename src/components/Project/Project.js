@@ -1,8 +1,8 @@
-import TodoList from './TodoList';
-import AddTodoForm from './AddTodoForm';
-import DataStorageHandler from './DataStorageHandler';
-import Notification from './Notification';
-import ProjectList from './ProjectList';
+import TodoList from '../TodoList/TodoList';
+import AddTodoForm from '../AddTodoForm/AddTodoForm';
+import DataStorageHandler from '../../utils/DataStorageHandler';
+import Notification from '../Notification/Notification';
+import ProjectList from '../ProjectList/ProjectList';
 
 const Project = ({ project }) => {
 
