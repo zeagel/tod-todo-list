@@ -1,0 +1,33 @@
+#add-project-button {
+  display: flex;
+  justify-content: flex-end;
+  height: 55px;
+}
+
+#project-list {
+  font-size: 1.5rem;
+  background-color: #fff2df;
+  padding: 10px;
+  border: 2px solid #f9ccac;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+#project-list > div {
+  margin-top: 5px;
+}
+
+.project-row {
+  display: flex;
+  cursor: pointer;
+  padding: 3px 5px;
+}
+
+.project-row:nth-child(even) {
+  background-color: #d9ad7c;
+}
+
+.project-row > div:nth-child(1) {
+  padding-right: 10px;
+  width: 55px;
+}

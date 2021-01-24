@@ -3,6 +3,8 @@ import Project from '../Project/Project';
 import TodoItem from '../../classes/TodoItem';
 import DataStorageHandler from '../../utils/DataStorageHandler';
 
+import './addtodoform.css';
+
 const AddTodoForm = ({ project }) => {
   
   const handleOnSubmit = () => {
@@ -20,7 +22,7 @@ const AddTodoForm = ({ project }) => {
         throw new Error ('Input error: invalid todo description.')
       }
 
-      if (dueDate !== '' && !isValid(dueDate)) {
+      if (dueDate !== '' && !isValid(new Date(dueDate))) {
         throw new Error ('Input error: invalid due date.')
       }
 
@@ -82,8 +84,9 @@ const AddTodoForm = ({ project }) => {
    formElem.classList.add('flex-dir-col');
 
    // Add form title
-   const title = document.createElement('h2');
-   title.innerText = 'Create new todo';
+   const title = document.createElement('div');
+   title.classList.add('heading-2');
+   title.innerText = 'Create new todo:';
    formElem.appendChild(title);
    
    // Add todo title input field
@@ -131,19 +134,21 @@ const AddTodoForm = ({ project }) => {
    buttonContainer.classList.add('flex-dir-row');
    buttonContainer.classList.add('flex-justify-sb');
 
+   // Add cancel button
+   const cancelButton = document.createElement('button');
+   cancelButton.classList.add('secondary-btn');
+   const cancelButtonLabel = document.createTextNode('Cancel');
+   cancelButton.appendChild(cancelButtonLabel);
+   cancelButton.addEventListener("click", () => Project({ project }) );
+   buttonContainer.appendChild(cancelButton);
+
    // Add submit button
    const submitButton = document.createElement('button');
+   submitButton.classList.add('primary-btn');
    const submitButtonLabel = document.createTextNode('Save');
    submitButton.appendChild(submitButtonLabel);
    submitButton.addEventListener("click", () => { handleOnSubmit() });
    buttonContainer.appendChild(submitButton);
-   
-   // Add cancel button
-   const cancelButton = document.createElement('button');
-   const cancelButtonLabel = document.createTextNode('Cancel');
-   cancelButton.appendChild(cancelButtonLabel);
-   cancelButton.addEventListener("click", () => location.reload() );
-   buttonContainer.appendChild(cancelButton);
 
    // Add button container on the form element
    formElem.appendChild(buttonContainer);

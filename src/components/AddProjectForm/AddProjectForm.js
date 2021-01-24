@@ -1,6 +1,8 @@
 import ProjectItem from '../../classes/ProjectItem';
 import DataStorageHandler from '../../utils/DataStorageHandler';
 
+import './addprojectform.css';
+
 const AddProjectForm = () => {
 
   const handleOnSubmit = (e) => {
@@ -31,9 +33,9 @@ const AddProjectForm = () => {
   };
 
   const render = () => {
-    // Clear earlier content from project-list element
-    const projectListElem = document.getElementById('project-list');
-    projectListElem.remove();
+    // Clear earlier content from the main-content element
+    const mainContainer = document.getElementById('main-content');
+    mainContainer.innerHTML = '';
 
     // Add div element for create project 'form'
     const formElem = document.createElement('div');
@@ -41,8 +43,9 @@ const AddProjectForm = () => {
     formElem.classList.add('flex-dir-col');
 
     // Add form title
-    const title = document.createElement('h2');
-    title.innerText = 'Create new project';
+    const title = document.createElement('div');
+    title.classList.add('heading-2')
+    title.innerText = 'Create new project:';
     formElem.appendChild(title);
     
     // Add project title input field
@@ -69,26 +72,27 @@ const AddProjectForm = () => {
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('flex-dir-row');
     buttonContainer.classList.add('flex-justify-sb');
-
-    // Add submit button
-    const submitButton = document.createElement('button');
-    const submitButtonLabel = document.createTextNode('Save');
-    submitButton.appendChild(submitButtonLabel);
-    submitButton.addEventListener("click", (e) => { handleOnSubmit(e) });
-    buttonContainer.appendChild(submitButton);
     
     // Add cancel button
     const cancelButton = document.createElement('button');
+    cancelButton.classList.add('secondary-btn');
     const cancelButtonLabel = document.createTextNode('Cancel');
     cancelButton.appendChild(cancelButtonLabel);
     cancelButton.addEventListener("click", () => location.reload() );
     buttonContainer.appendChild(cancelButton);
 
+    // Add submit button
+    const submitButton = document.createElement('button');
+    submitButton.classList.add('primary-btn');
+    const submitButtonLabel = document.createTextNode('Save');
+    submitButton.appendChild(submitButtonLabel);
+    submitButton.addEventListener("click", (e) => { handleOnSubmit(e) });
+    buttonContainer.appendChild(submitButton);
+
     // Add button container on the form element
     formElem.appendChild(buttonContainer);
 
     // Append form element on the page
-    const mainContainer = document.getElementById('main-content');
     mainContainer.appendChild(formElem);
   };
 

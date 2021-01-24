@@ -3,6 +3,10 @@ import DataStorageHandler from '../../utils/DataStorageHandler';
 import AddNoteForm from '../AddNoteForm/AddNoteForm';
 import NoteList from '../NoteList/NoteList';
 import Notification from '../Notification/Notification';
+import PriorityTag from '../PriorityTag/PriorityTag';
+import DueDateTag from '../DueDateTag/DueDateTag';
+
+import './todo.css';
 
 const Todo = ({ project, todo }) => {
 
@@ -59,69 +63,93 @@ const Todo = ({ project, todo }) => {
     const mainContent = document.getElementById('main-content');
     mainContent.innerHTML = '';
 
+    // Add button for returning project.
+    const backButton = document.createElement('button');
+    backButton.id = 'back-to-project-btn';
+    backButton.classList.add('secondary-btn');
+    const backButtonLabel = document.createTextNode('Back');
+    backButton.appendChild(backButtonLabel);
+    backButton.addEventListener("click", () => { Project({ project }) } );
+    mainContent.appendChild(backButton);
+
     // Add container element for the todo to be displayed.
     const todoContainer = document.createElement('div');
     todoContainer.id = project.id;
     todoContainer.classList.add('todo-container');
 
-    // Add button for returning project.
-    const backButton = document.createElement('button');
-    backButton.id = 'back-to-project-btn';
-    const backButtonLabel = document.createTextNode('Back to project');
-    backButton.appendChild(backButtonLabel);
-    backButton.addEventListener("click", () => { Project({ project }) } );
-    todoContainer.appendChild(backButton);
+    // Add todo heading row for title and delete-todo button
+    const todoHeadingRow = document.createElement('div');
+    todoHeadingRow.classList.add('flex-dir-row');
+    todoHeadingRow.classList.add('flex-justify-sb');
 
-    // Add button for adding a new note-item in todo
-    const addButton = document.createElement('button');
-    addButton.id = 'add-note-btn';
-    const addButtonLabel = document.createTextNode('New note');
-    addButton.appendChild(addButtonLabel);
-    addButton.addEventListener("click", () => { AddNoteForm({ project, todo }) } );
-    todoContainer.appendChild(addButton);
-    
-    // Add button for removing the todo.
+    // Title
+    const titleElem = document.createElement('div');
+    const title = document.createElement('div');
+    title.classList.add('heading-2');
+    title.innerText = todo.title;
+    titleElem.appendChild(title);
+    const subTitle = document.createElement('div');
+    subTitle.classList.add('flex-dir-row', 'tag-row');
+    console.log(PriorityTag({ priority: todo.priority }));
+    subTitle.appendChild(PriorityTag({ priority: todo.priority }));
+    if (todo.dueDate) {
+      subTitle.appendChild(DueDateTag({ date: todo.dueDate })); 
+    }
+    titleElem.appendChild(subTitle);
+    todoHeadingRow.appendChild(titleElem);
+
+    // Button
     const delButton = document.createElement('button');
     delButton.id = 'del-todo-btn';
     const delButtonLabel = document.createTextNode('Delete todo');
     delButton.appendChild(delButtonLabel);
     delButton.addEventListener("click", () => { handleDeleteOnClick() } );
-    todoContainer.appendChild(delButton);
-
-    // Add todo details container element
-    const todoDetailsElem = document.createElement('div');
-    todoDetailsElem.classList.add('todo-details');
-
-    // Add todo title element in details
-    const titleElem = document.createElement('div');
-    titleElem.innerText = todo.title;
-    todoDetailsElem.appendChild(titleElem);   
+    todoHeadingRow.appendChild(delButton);
     
-    // Add todo due date element in details
-    const dueDateElem = document.createElement('div');
-    dueDateElem.innerText = todo.dueDate ? todo.dueDate : 'no due date';
-    todoDetailsElem.appendChild(dueDateElem);
+    // Append title and button on the row
+    todoContainer.appendChild(todoHeadingRow);
 
-    // Add todo priority element in details
-    const priorityElem = document.createElement('div');
-    priorityElem.innerText = todo.priority;
-    todoDetailsElem.appendChild(priorityElem);
-
-    // Add todo description element in details (if given)
+    // Row for todo description
     if (todo.description) {
       const descElem = document.createElement('div');
+      descElem.classList.add('todo-description');
       descElem.innerText = todo.description;
-      todoDetailsElem.appendChild(descElem);
+      todoContainer.appendChild(descElem);
     }
+    
+    const notesContainer = document.createElement('div');
+    notesContainer.classList.add('notes-container');
+    
+    // Add todo notes heading row (title and add-note button)
+    const notesHeadingRow = document.createElement('div');
+    notesHeadingRow.classList.add('flex-dir-row');
+    notesHeadingRow.classList.add('flex-justify-sb');
+
+    // Title
+    const noteTitle = document.createElement('div');
+    noteTitle.classList.add('heading-2');
+    noteTitle.innerText = 'Notes:';
+    notesHeadingRow.appendChild(noteTitle);
+
+    // Button
+    const addButton = document.createElement('button');
+    addButton.id = 'add-note-btn';
+    addButton.classList.add('primary-btn');
+    const addButtonLabel = document.createTextNode('New note');
+    addButton.appendChild(addButtonLabel);
+    addButton.addEventListener("click", () => { AddNoteForm({ project, todo }) } );
+    notesHeadingRow.appendChild(addButton);
+    
+    // Append title and button on the row
+    notesContainer.appendChild(notesHeadingRow);
 
     // Add all todo's note-items (if any)
     const noteListElement = NoteList({ notes: todo.notes });
     if (noteListElement) {
-      todoDetailsElem.appendChild(noteListElement);
+      notesContainer.appendChild(noteListElement);
     }
-
-    // Add details element in project container.
-    todoContainer.appendChild(todoDetailsElem);
+    
+    todoContainer.appendChild(notesContainer);
     
     // Show project element on the screen.
     document.getElementById('main-content').appendChild(todoContainer);

@@ -1,8 +1,9 @@
 import DataStorageHandler from '../../utils/DataStorageHandler';
 import Todo from '../Todo/Todo';
 
+import './addnoteform.css';
+
 const AddNoteForm = ({ project, todo }) => {
-  console.log('Add Note clicked, todo:', todo);
 
   const handleOnSubmit = () => {
     const noteText = document.getElementById('note-text').value;
@@ -22,13 +23,7 @@ const AddNoteForm = ({ project, todo }) => {
       const projectIndex = projects.findIndex(p => p.id === project.id);
       const todoIndex = projects[projectIndex].todoList.findIndex(t => t.id === todo.id);
 
-      console.log(projects[projectIndex].todoList);
-
-      console.log('before:', projects[projectIndex].todoList[todoIndex]);
-
       projects[projectIndex].todoList[todoIndex].addNote({ text: noteText });
-
-      console.log('after:', projects[projectIndex].todoList[todoIndex].notes);
 
       // Save updated projects back to local storage
       DataStorageHandler.saveData(projects);
@@ -52,8 +47,9 @@ const AddNoteForm = ({ project, todo }) => {
     formElem.classList.add('flex-dir-col');
 
     // Add form title
-    const title = document.createElement('h2');
-    title.innerText = 'Create new note';
+    const title = document.createElement('div');
+    title.classList.add('heading-2');
+    title.innerText = 'Create new note:';
     formElem.appendChild(title);
     
     // Add note text input field
@@ -70,20 +66,22 @@ const AddNoteForm = ({ project, todo }) => {
     const buttonContainer = document.createElement('div');
     buttonContainer.classList.add('flex-dir-row');
     buttonContainer.classList.add('flex-justify-sb');
-
-    // Add submit button
-    const submitButton = document.createElement('button');
-    const submitButtonLabel = document.createTextNode('Save');
-    submitButton.appendChild(submitButtonLabel);
-    submitButton.addEventListener("click", () => { handleOnSubmit() });
-    buttonContainer.appendChild(submitButton);
-    
+   
     // Add cancel button
     const cancelButton = document.createElement('button');
+    cancelButton.classList.add('secondary-btn');
     const cancelButtonLabel = document.createTextNode('Cancel');
     cancelButton.appendChild(cancelButtonLabel);
     cancelButton.addEventListener("click", () => Todo({ project, todo }) );
     buttonContainer.appendChild(cancelButton);
+
+     // Add submit button
+     const submitButton = document.createElement('button');
+     submitButton.classList.add('primary-btn');
+     const submitButtonLabel = document.createTextNode('Save');
+     submitButton.appendChild(submitButtonLabel);
+     submitButton.addEventListener("click", () => { handleOnSubmit() });
+     buttonContainer.appendChild(submitButton); 
 
     // Add button container on the form element
     formElem.appendChild(buttonContainer);

@@ -99,7 +99,7 @@ export default class TodoItem {
         throw new Error('Note creation error: note text is too long.'); 
       }
 
-      if (text.length === 50) {
+      if (text === '') {
         throw new Error('Note creation error: note text cannot be empty.'); 
       }
 

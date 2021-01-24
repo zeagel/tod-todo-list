@@ -1,6 +1,8 @@
 import DataStorageHandler from "../../utils/DataStorageHandler";
 import Todo from "../Todo/Todo";
 
+import './notelist.css';
+
 const NoteList = ({ notes }) => {
 
   const handleDeleteNoteOnClick = ({ id }) => {
@@ -53,27 +55,34 @@ const NoteList = ({ notes }) => {
       notesContainer.id = 'note-list';
     }
 
-    // Loop through all notes and generate note rows element
-    notes.forEach(n => {
-      const row = document.createElement('div');
-      
-      const timestampElem = document.createElement('div');
-      timestampElem.innerText = n.timestamp;
-      row.appendChild(timestampElem);
+    if (notes.length > 0) {
+      notesContainer.classList.add('note-grid');
 
-      const textElem = document.createElement('div');
-      textElem.innerText = n.text;
-      row.appendChild(textElem);
+      // Loop through all notes and generate note rows element
+      notes.forEach(n => {
+        const textElem = document.createElement('div');
+        textElem.classList.add('note-text');
+        textElem.innerHTML = n.text;
+        notesContainer.appendChild(textElem);
 
-      const delButton = document.createElement('button');
-      delButton.classList.add('del-note-btn');
-      const delButtonLabel = document.createTextNode('Delete note');
-      delButton.appendChild(delButtonLabel);
-      delButton.addEventListener("click", () => { handleDeleteNoteOnClick({ id: n.id }) } );
-      row.appendChild(delButton);
+        const timestampElem = document.createElement('div');
+        timestampElem.classList.add('timestamp');
+        timestampElem.innerText = n.timestamp;
+        notesContainer.appendChild(timestampElem);
+        
+        const delIcon = document.createElement('div');
+        delIcon.classList.add('del-icon');
+        delIcon.addEventListener("click", () => { handleDeleteNoteOnClick({ id: n.id }) } );
+        delIcon.innerHTML = '<i class="fas fa-trash-alt"></i>';
+        notesContainer.appendChild(delIcon);
+      });
 
-      notesContainer.appendChild(row);
-    });
+    } else {
+      const noNotesElem = document.createElement('div');
+      noNotesElem.classList.add('no-notes-info');
+      noNotesElem.innerText = 'No notes yet';
+      notesContainer.appendChild(noNotesElem);
+    }
 
     return notesContainer;
   };

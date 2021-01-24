@@ -1,0 +1,21 @@
+.duedate-tag {
+  padding: 3px 20px;
+  border-radius: 15px;
+}
+
+.low {
+  background-color: #FFEB3B;
+  border: 2px solid #e2d138; 
+}
+
+.medium {
+  background-color: #FF9800;
+  border: 2px solid #d47f02;
+  color: white; 
+}
+
+.high {
+  background-color: #F44336;
+  border: 2px solid #f72414;
+  color: white; 
+}

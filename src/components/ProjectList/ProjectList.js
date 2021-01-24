@@ -1,5 +1,6 @@
 import Project from '../Project/Project';
 import AddProjectForm from '../AddProjectForm/AddProjectForm';
+import './projectlist.css';
 
 const ProjectList = ({ projects }) => {
 
@@ -7,18 +8,39 @@ const ProjectList = ({ projects }) => {
     // Get main-content element and clear it.
     const mainContainer = document.getElementById('main-content');
     mainContainer.innerHTML = '';
-    
+
+    //mainContainer.appendChild(buttonRow);    
+
+    // Add container element for project list
     const projectListContainer = document.createElement('div');
     projectListContainer.id = 'project-list';
-  
-    const div = document.createElement('div');
-    const button = document.createElement('button');
-    button.addEventListener("click", () => { AddProjectForm() });
-    const label = document.createTextNode('New project');
-    button.appendChild(label);
-    div.appendChild(button);
-    projectListContainer.appendChild(div);
+
+    // Add row element for title and add-project button
+    const titleRow = document.createElement('div');
+    titleRow.classList.add('flex-dir-row');
+    titleRow.classList.add('flex-justify-sb');
+
+    // Title element
+    const titleElem = document.createElement('div');
+    titleElem.classList.add('heading-2');
+    titleElem.innerText = 'Projects:';
+    titleRow.appendChild(titleElem);
     
+    // Button element
+    const buttonRow = document.createElement('div');
+    buttonRow.id = 'add-project-button';
+    const button = document.createElement('button');
+    button.classList.add('primary-btn');
+    button.addEventListener("click", () => { AddProjectForm() });
+    const label = document.createTextNode('Add project');
+    button.appendChild(label);
+    buttonRow.appendChild(button);
+    titleRow.appendChild(buttonRow);
+
+    // Add title and button on the row
+    projectListContainer.appendChild(titleRow);
+
+    // Loop through all projects and generate project rows
     projects.forEach(project => {
       const projectRow = document.createElement('div');
       projectRow.classList.add('project-row');

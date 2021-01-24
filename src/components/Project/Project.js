@@ -1,8 +1,9 @@
 import TodoList from '../TodoList/TodoList';
-import AddTodoForm from '../AddTodoForm/AddTodoForm';
 import DataStorageHandler from '../../utils/DataStorageHandler';
 import Notification from '../Notification/Notification';
 import ProjectList from '../ProjectList/ProjectList';
+
+import './project.css';
 
 const Project = ({ project }) => {
 
@@ -43,6 +44,11 @@ const Project = ({ project }) => {
       console.log(e.message);
     }
   };
+
+  const handleBackOnClick = () => {
+    const projects = DataStorageHandler.loadData();
+    ProjectList({ projects });
+  };
   
   const render = () => {
 
@@ -55,41 +61,50 @@ const Project = ({ project }) => {
     projectContainer.id = project.id;
     projectContainer.className = 'project-container';
 
+    // Add wrapper element for buttons
+    const buttonRow = document.createElement('div');
+  
     // Add button for returning project list.
     const backButton = document.createElement('button');
     backButton.id = 'back-to-projects-btn';
-    const backButtonLabel = document.createTextNode('Back to projects');
+    backButton.classList.add('secondary-btn');
+    const backButtonLabel = document.createTextNode('Back');
     backButton.appendChild(backButtonLabel);
-    backButton.addEventListener("click", () => { location.reload() } );
-    projectContainer.appendChild(backButton);
-
-    // Add button for adding a new todo-item in container
-    const addButton = document.createElement('button');
-    addButton.id = 'add-todo-btn';
-    const addButtonLabel = document.createTextNode('New todo');
-    addButton.appendChild(addButtonLabel);
-    addButton.addEventListener("click", () => { AddTodoForm({ project }) } );
-    projectContainer.appendChild(addButton);
-    
-    // Add button for removing the project.
-    const delButton = document.createElement('button');
-    delButton.id = 'del-project-btn';
-    const delButtonLabel = document.createTextNode('Delete project');
-    delButton.appendChild(delButtonLabel);
-    delButton.addEventListener("click", () => { handleDeleteOnClick() } );
-    projectContainer.appendChild(delButton);
+    backButton.addEventListener("click", () => { handleBackOnClick() } );
+    buttonRow.appendChild(backButton);
+   
+    projectContainer.appendChild(buttonRow);
 
     // Add project details container element
     const projectDetailsElem = document.createElement('div');
     projectDetailsElem.className = 'project-details';
 
-    // Add project title element in details
+    // Add project heading row for title and delete-project button
+    const projectHeadingRow = document.createElement('div');
+    projectHeadingRow.classList.add('flex-dir-row');
+    projectHeadingRow.classList.add('flex-justify-sb');
+
+    // Title
     const titleElem = document.createElement('div');
+    titleElem.classList.add('heading-2');
     titleElem.innerText = project.title;
-    projectDetailsElem.appendChild(titleElem);    
+    projectHeadingRow.appendChild(titleElem);
+    
+    // Button
+    const delButton = document.createElement('button');
+    delButton.id = 'del-project-btn';
+    delButton.classList.add('warning-btn');
+    const delButtonLabel = document.createTextNode('Delete project');
+    delButton.appendChild(delButtonLabel);
+    delButton.addEventListener("click", () => { handleDeleteOnClick() } );
+    projectHeadingRow.appendChild(delButton);
+   
+    // Append title and button on the row
+    projectDetailsElem.appendChild(projectHeadingRow);    
 
     // Add project description element in details
     const descElem = document.createElement('div');
+    descElem.classList.add('project-description');
     descElem.innerText = project.description;
     projectDetailsElem.appendChild(descElem);
 
