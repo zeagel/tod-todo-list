@@ -40,23 +40,38 @@ const ProjectList = ({ projects }) => {
     // Add title and button on the row
     projectListContainer.appendChild(titleRow);
 
-    // Loop through all projects and generate project rows
-    projects.forEach(project => {
-      const projectRow = document.createElement('div');
-      projectRow.classList.add('project-row');
-      projectRow.id = project.id;
-      projectRow.addEventListener("click", () => { Project({ project }) });
+    if (projects.length > 0) {
       
-      const todoCountElem = document.createElement('div')
-      todoCountElem.innerText = `( ${project.todoList.length} )`;
-      projectRow.appendChild(todoCountElem);
+      // Add project list header row
+      const headerRow = document.createElement('div');
+      headerRow.classList.add('project-row-heading');
+      headerRow.innerHTML = `<div>Todos:</div><div>Project name:</div>`;
+      projectListContainer.appendChild(headerRow);
+      
+      
+      // Loop through all projects and generate project rows
+      projects.forEach(project => {
+        const projectRow = document.createElement('div');
+        projectRow.classList.add('project-row');
+        projectRow.id = project.id;
+        projectRow.addEventListener("click", () => { Project({ project }) });
+        
+        const todoCountElem = document.createElement('div')
+        todoCountElem.innerText = `( ${project.todoList.length} )`;
+        projectRow.appendChild(todoCountElem);
 
-      const projectTitle = document.createElement('div')
-      projectTitle.innerText = project.title;
-      projectRow.appendChild(projectTitle);
-      
-      projectListContainer.appendChild(projectRow);
-    });
+        const projectTitle = document.createElement('div')
+        projectTitle.innerText = project.title;
+        projectRow.appendChild(projectTitle);
+        
+        projectListContainer.appendChild(projectRow);
+      });
+
+    } else {
+      const noProjectInfo = document.createElement('div');
+      noProjectInfo.innerText = 'No projects yet';
+      projectListContainer.appendChild(noProjectInfo);
+    }
     
     mainContainer.appendChild(projectListContainer);
   };

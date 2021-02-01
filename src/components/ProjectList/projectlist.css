@@ -17,17 +17,30 @@
   margin-top: 5px;
 }
 
+.project-row-heading {
+  display: flex;
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: white;
+  background-color: #a2836e;  
+  padding: 3px 5px;
+}
+
 .project-row {
   display: flex;
   cursor: pointer;
   padding: 3px 5px;
 }
 
+.project-row:hover {
+  text-decoration: underline;
+}
+
 .project-row:nth-child(even) {
   background-color: #d9ad7c;
 }
 
-.project-row > div:nth-child(1) {
+.project-row > div:nth-child(1), .project-row-heading > div:nth-child(1) {
   padding-right: 10px;
   width: 55px;
 }
